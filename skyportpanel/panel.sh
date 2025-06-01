@@ -1,19 +1,6 @@
 #!/bin/bash
 
-# Clear the screen
-clear
-# Check if the script is run as root
-if [ "$EUID" -ne 0 ]; then
-  echo -e "${RED}Please run this script as root.${NC}"
-  exit 1
-fi
-
-echo -e "${CYAN}$ascii_art${NC}"
-
-
-
-echo_message "* Installing Dependencies"
-
+sudo bash -c '
 # Update package list and install dependencies
 sudo apt update
 sudo apt install -y curl software-properties-common
@@ -32,23 +19,17 @@ git clone https://github.com/achul123/panel5.git
 cd panel5 || { echo_message "Failed to change directory to panel"; exit 1; }
 npm install
 
-echo_message "* Installed Files"
-
-echo_message "* Starting Skyport"
-
 # Run setup scripts
+clear
 npm run seed
 npm run createUser
-
-echo_message "* Starting Skyport With PM2"
 
 # Install panel and start the application
 sudo npm install -g pm2
 pm2 start index.js
 
-echo_message "* Skyport Installed and Started on Port 3001"
-
 
 # Clear the screen after finishing
 clear
 echo "Skyport Installed by using KS Warrior code"
+'
