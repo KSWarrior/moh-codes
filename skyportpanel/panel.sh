@@ -13,7 +13,7 @@ echo_message() {
 }
 
 echo_message "Updating and installing dependencies"
-apt update
+apt update && apt upgrade -y
 apt install -y curl software-properties-common git
 curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 apt install -y nodejs
