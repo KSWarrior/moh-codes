@@ -1,47 +1,31 @@
 #!/bin/bash
 
 sudo bash -c '
-# ─── Install Dependencies ───────────────────────────────────────
-apt update -y
-apt install -y curl git software-properties-common
+# Update package list and install dependencies
+sudo apt update
+sudo apt install -y curl software-properties-common
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get install nodejs -y
+sudo apt install git -y
 
-# Install Node.js 20 if not installed
-if ! command -v node &>/dev/null || [[ $(node -v) != v20* ]]; then
-  curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-  apt install -y nodejs
-else
-  echo -e "${GREEN}[✓] Node.js 20 already installed.${NC}"
-fi
-
-# ─── Clone Repository ───────────────────────────────────────────
-if [ -d "node" ]; then
-  echo -e "${RED}[!] 'node' directory already exists. Removing it...${NC}"
-  rm -rf node
-fi
-
-echo -e "${CYAN}[+] Cloning draco-daemon...${NC}"
+# Create directory, clone repository, and install files
 git clone https://github.com/dragonlabsdev/draco-daemon
 mv draco-daemon node
 cd node
-
-# ─── Install Node Modules ───────────────────────────────────────
 npm install
+cd node
 
-# ─── Prompt for Configuration ───────────────────────────────────
-read -p "Enter configuration command or URL: " configure
+#Prompt user for a configuration command or URL
+read -p "Enter configuration: " configure
 
-# Convert http:// to https:// if needed
+# If the input starts with http://, replace it with https://
 if [[ $configure == http://* ]]; then
-  configure="${configure/http:\/\//https://}"
+    configure="${configure/http:\/\//https://}"
 fi
 
-# ─── Run Configuration ──────────────────────────────────────────
-echo -e "${CYAN}[+] Running configuration: $configure${NC}"
-eval "$configure"
+# Run the configuration command
+$configure
 
-# ─── Start Node Daemon ──────────────────────────────────────────
-echo -e "${GREEN}[✓] Starting Draco Node...${NC}"
+# Start node
 node .
-
-echo -e "${GREEN}[✓] Node install and start completed.${NC}"
 '
