@@ -3,8 +3,7 @@
 echo "Choose an option:"
 echo "1) Install Panel"
 echo "2) Install Wings"
-echo "3) Install Both Panel & Wings"
-read -p "Enter your choice [1-3]: " choice
+read -p "Enter your choice [1-2]: " choice
 
 case $choice in
     1)
@@ -12,12 +11,6 @@ case $choice in
         bash <(curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/dragonpanel/panel.sh)
         ;;
     2)
-        echo "Installing Wings..."
-        bash <(curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/dragonpanel/wings.sh)
-        ;;
-    3)
-        echo "Installing Panel..."
-        bash <(curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/dragonpanel/panel.sh)
         echo "Installing Wings..."
         bash <(curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/dragonpanel/wings.sh)
         ;;
