@@ -1,35 +1,49 @@
 #!/bin/bash
 
+# Run everything as root
 sudo bash -c '
-# Update package list and install dependencies
-sudo apt update
-sudo apt install -y curl software-properties-common
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt-get install nodejs -y 
-sudo apt install git -y
 
-echo_message "* Installed Dependencies"
+# === Helper Function ===
+echo_message() {
+  echo -e "\n============================"
+  echo -e "$1"
+  echo -e "============================\n"
+}
 
-echo_message "* Installing Files"
+# === Update and install dependencies ===
+echo_message "Updating and installing dependencies"
+apt update
+apt install -y curl software-properties-common git
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+apt install -y nodejs
 
-# Create directory, clone repository, and install files
-mkdir -p panel5
-cd panel5 || { echo_message "Failed to change directory to skyport"; exit 1; }
+# === Clone the repository ===
+echo_message "Cloning panel repository"
+mkdir -p /opt/panel5
+cd /opt/panel5 || { echo_message "Failed to change directory to /opt/panel5"; exit 1; }
+
+# If repo already exists, remove it
+rm -rf panel5
 git clone https://github.com/achul123/panel5.git
-cd panel5 || { echo_message "Failed to change directory to panel"; exit 1; }
+cd panel5 || { echo_message "Failed to change directory to panel5"; exit 1; }
+
+# === Install node modules ===
+echo_message "Installing npm dependencies"
 npm install
 
-# Run setup scripts
-clear
+# === Run initial setup ===
+echo_message "Running setup scripts"
 npm run seed
 npm run createUser
 
-# Install panel and start the application
-sudo npm install -g pm2
-pm2 start index.js
+# === Install and configure PM2 ===
+echo_message "Setting up PM2 process manager"
+npm install -g pm2
+pm2 start index.js --name skyport-panel
+pm2 save
+pm2 startup systemd -u $(whoami) --hp $HOME | bash
 
-
-# Clear the screen after finishing
+# === Finished ===
 clear
-echo "Skyport Installed by using KS Warrior code"
+echo_message "✅ Skyport Installed using KS Warrior code!"
 '
