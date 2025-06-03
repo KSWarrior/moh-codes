@@ -14,14 +14,14 @@ case $choice in
   1)
     echo "Downloading and Installing Panel..."
     curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/dragonpanel/panel.sh -o panel.sh
-    chmod +x panel.sh
-    ./panel.sh
+    bash panel.sh
+    rm -f panel.sh
     ;;
   2)
     echo "Downloading and Installing Wings..."
     curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/dragonpanel/wings.sh -o wings.sh
-    chmod +x wings.sh
-    ./wings.sh
+    bash wings.sh
+    rm -f wings.sh
     ;;
   3)
     echo "Exiting installer."
