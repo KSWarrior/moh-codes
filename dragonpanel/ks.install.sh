@@ -12,12 +12,16 @@ read -p "Enter your choice [1-3]: " choice
 
 case $choice in
   1)
-    echo "Installing Panel..."
-    bash <(curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/dragonpanel/panel.sh)
+    echo "Downloading and Installing Panel..."
+    curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/dragonpanel/panel.sh -o panel.sh
+    chmod +x panel.sh
+    ./panel.sh
     ;;
   2)
-    echo "Installing Wings..."
-    bash <(curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/dragonpanel/wings.sh)
+    echo "Downloading and Installing Wings..."
+    curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/dragonpanel/wings.sh -o wings.sh
+    chmod +x wings.sh
+    ./wings.sh
     ;;
   3)
     echo "Exiting installer."
