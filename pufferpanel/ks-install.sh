@@ -1,9 +1,9 @@
-#!/bin/bash
 sudo bash -c '
-# ─── KS Warrior ───────────────────────────────
-echo "======================================="
-echo "       PufferPanel Installer by KS Warrior"
-echo "======================================="
+# ─── KS Warrior PufferPanel Installer ────────────────
+echo "=============================================="
+echo "     ⚡ PufferPanel Installer by KS Warrior ⚡"
+echo "   💬 Join our Discord: https://discord.gg/2kAYnH655h"
+echo "=============================================="
 
 # Add the PufferPanel APT repository and its GPG key
 curl -s https://packagecloud.io/install/repositories/pufferpanel/pufferpanel/script.deb.sh | bash
