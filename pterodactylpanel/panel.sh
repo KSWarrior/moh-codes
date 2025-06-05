@@ -4,7 +4,7 @@
 sudo bash -c '
 # Create directories
 mkdir -p pterodactyl/panel
-cd pterodactyl/panel || exit
+cd pterodactyl/panel
 
 # Download the docker-compose file for the panel
 wget https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/pterodactylpanel/panel.yml -O docker-compose.yml
