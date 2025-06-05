@@ -1,6 +1,12 @@
 #!/bin/bash
 
 sudo bash -c '
+# ─── KS Warrior Dragon Panel Installer ────────────────
+echo "=============================================="
+echo "     ⚡ PufferPanel Installer by KS Warrior ⚡"
+echo "   💬 Join our Discord: https://discord.gg/2kAYnH655h"
+echo "=============================================="
+
 # Update package list and install dependencies
 sudo apt update
 sudo apt install -y curl software-properties-common
