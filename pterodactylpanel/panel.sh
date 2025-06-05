@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Elevate to root and execute all commands
+# Run everything as root
 sudo bash -c '
 # ─── KS Warrior Pterodactyl Panel Installer ────────────────
 echo "=============================================="
@@ -8,20 +8,29 @@ echo "     ⚡ Pterodactyl Panel Installer by KS Warrior ⚡"
 echo "   💬 Join our Discord: https://discord.gg/2kAYnH655h"
 echo "=============================================="
 
-# Create directories
-mkdir -p pterodactyl/panel
-cd pterodactyl/panel
+# Exit on error
+set -e
 
-# Download the docker-compose file for the panel
-wget https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/pterodactylpanel/panel.yml -O docker-compose.yml
+# Update and install Docker and Docker Compose if not installed
+apt update && apt install -y docker.io docker-compose
 
-# Install required packages
-apt update
-apt install docker-compose -y
+# Enable and start Docker service
+systemctl enable docker
+systemctl start docker
 
-# Start the containers in detached mode
+# Create and enter panel directory
+mkdir -p /root/pterodactyl/panel
+cd /root/pterodactyl/panel
+
+# Download panel.yml as docker-compose.yml
+wget -q https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/pterodactylpanel/panel.yml -O docker-compose.yml
+
+# Start the containers
 docker-compose up -d
 
-# Run the user creation command inside the panel container
+# Wait a few seconds to make sure services initialize (optional but useful)
+sleep 5
+
+# Run user creation
 docker-compose run --rm panel php artisan p:user:make
-'.
+'
