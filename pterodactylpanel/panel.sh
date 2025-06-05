@@ -98,15 +98,6 @@ echo "⚙️  Pterodactyl Panel Installing..."
 # Start docker-compose in background and log output
 docker-compose up -d > docker-ks-pterodactyl.log 2>&1 &
 
-# Fake progress bar while docker-compose runs
-for i in 5 10 20 30 40 50 60 70 80 90 100; do
-    echo "📦 Installing... $i%"
-    sleep 1
-done
-
-echo "✅ Pterodactyl Panel installation completed!"
-echo "📄 Logs saved to docker-ks-pterodactyl.log"
-
 # Step 4: Create an admin user for the Panel
 echo "📧 Create user for Pterodactyl Panel"
 
