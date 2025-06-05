@@ -12,8 +12,8 @@ echo "=============================================="
 set -e
 
 # Create and enter panel directory
-mkdir -p /root/pterodactyl/panel
-cd /root/pterodactyl/panel
+mkdir -p pterodactyl/panel
+cd ~/pterodactyl/panel
 
 # Download panel.yml as docker-compose.yml
 wget -q https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/pterodactylpanel/panel.yml -O docker-compose.yml
