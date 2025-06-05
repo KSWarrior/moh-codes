@@ -16,8 +16,8 @@ cd pterodactyl/panel
 wget https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/pterodactylpanel/panel.yml -O docker-compose.yml
 
 # Install required packages
-apt update && apt upgrade -y
-apt install docker-compose
+apt update
+apt install docker-compose -y
 
 # Start the containers in detached mode
 docker-compose up -d
