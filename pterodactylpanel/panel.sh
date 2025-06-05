@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Run everything as root
-sudo bash -c '
 # ─── KS Warrior Pterodactyl Panel Installer ────────────────
 echo "=============================================="
 echo "     ⚡ Pterodactyl Panel Installer by KS Warrior ⚡"
@@ -20,4 +18,3 @@ docker-compose up -d
 
 # Run user creation interactively
 docker-compose run --rm panel php artisan p:user:make
-'
