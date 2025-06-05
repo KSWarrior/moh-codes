@@ -11,13 +11,6 @@ echo "=============================================="
 # Exit on error
 set -e
 
-# Update and install Docker and Docker Compose if not installed
-apt update && apt install -y docker.io docker-compose
-
-# Enable and start Docker service
-systemctl enable docker
-systemctl start docker
-
 # Create and enter panel directory
 mkdir -p /root/pterodactyl/panel
 cd /root/pterodactyl/panel
