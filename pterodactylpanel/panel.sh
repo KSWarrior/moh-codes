@@ -7,7 +7,7 @@ mkdir -p pterodactyl/panel
 cd pterodactyl/panel || exit
 
 # Download the docker-compose file for the panel
-wget https://github.com/KSWarrior/Make-Own-Hosting/releases/download/PterodactylPanel/panel.yml -O docker-compose.yml
+wget https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/pterodactylpanel/panel.yml -O docker-compose.yml
 
 # Install required packages
 apt update && apt upgrade -y
