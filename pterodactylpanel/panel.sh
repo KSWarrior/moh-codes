@@ -21,9 +21,6 @@ wget -q https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/pt
 # Start the containers
 docker-compose up -d
 
-# Wait a few seconds to make sure services initialize (optional but useful)
-sleep 5
-
 # Run user creation
 docker-compose run --rm panel php artisan p:user:make
 '
