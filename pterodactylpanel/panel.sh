@@ -8,9 +8,6 @@ echo "     ⚡ Pterodactyl Panel Installer by KS Warrior ⚡"
 echo "   💬 Join our Discord: https://discord.gg/2kAYnH655h"
 echo "=============================================="
 
-# Exit on error
-set -e
-
 # Create and enter panel directory
 mkdir -p pterodactyl/panel
 cd ~/pterodactyl/panel
