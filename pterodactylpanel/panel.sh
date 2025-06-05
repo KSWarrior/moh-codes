@@ -92,33 +92,9 @@ networks:
         - subnet: 172.20.0.0/16
 EOF
 
-# Step 3: Start Docker containers
+# Start docker-compose
 echo "⚙️  Pterodactyl Panel Installing..."
-
-# Start docker-compose in background and log output
-docker-compose up -d > docker-ks-pterodactyl.log 2>&1 &
+docker-compose up -d
 
 # Step 4: Create an admin user for the Panel
-echo "📧 Create user for Pterodactyl Panel"
-
-read -p "Email: " EMAIL
-read -p "Username: " USERNAME
-read -p "First Name: " FIRSTNAME
-read -p "Last Name: " LASTNAME
-read -sp "Password: " PASSWORD
-echo
-read -p "Make this user an admin? (y/N): " ADMIN
-
-if [[ "$ADMIN" == "y" || "$ADMIN" == "Y" ]]; then
-  IS_ADMIN="--admin=1"
-else
-  IS_ADMIN=""
-fi
-
 docker-compose run --rm panel php artisan p:user:make \
-  --email="$EMAIL" \
-  --username="$USERNAME" \
-  --name-first="$FIRSTNAME" \
-  --name-last="$LASTNAME" \
-  --password="$PASSWORD" \
-  $IS_ADMIN
