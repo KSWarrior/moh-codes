@@ -5,6 +5,11 @@ original_dir=$(pwd)
 
 # Run privileged setup
 sudo bash -c '
+# ─── KS Warrior Pterodactyl Wings Installer ────────────────
+echo "=============================================="
+echo "     ⚡ Pterodactyl Wings Installer by KS Warrior ⚡"
+echo "   💬 Join our Discord: https://discord.gg/2kAYnH655h"
+echo "=============================================="
 
 # Create directories and navigate into wings
 mkdir -p pterodactyl/wings
