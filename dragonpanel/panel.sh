@@ -15,13 +15,13 @@ sudo apt-get install nodejs -y
 sudo apt install git -y
 
 # Create directory, clone repository, and install files
-git clone https://github.com/dragonlabsdev/panel-v1.0.0.git
-mv panel-v1.0.0 panel
+git clone https://github.com/dragonlabsdev/v2panel
+cd v2panel
+unzip panel.zip
 cd panel
 npm install
 npm run seed
 npm run createUser
 node .
-
 echo "Dragon Panel Installed by using KS Warrior Code"
 '
