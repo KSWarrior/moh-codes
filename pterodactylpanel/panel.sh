@@ -2,6 +2,12 @@
 
 # Elevate to root and execute all commands
 sudo bash -c '
+# ─── KS Warrior Pterodactyl Panel Installer ────────────────
+echo "=============================================="
+echo "     ⚡ Pterodactyl Panel Installer by KS Warrior ⚡"
+echo "   💬 Join our Discord: https://discord.gg/2kAYnH655h"
+echo "=============================================="
+
 # Create directories
 mkdir -p pterodactyl/panel
 cd pterodactyl/panel
