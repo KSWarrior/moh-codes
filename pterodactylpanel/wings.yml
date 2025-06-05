@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   wings:
     image: ghcr.io/pterodactyl/wings:v1.6.1
@@ -7,9 +5,9 @@ services:
     networks:
       - wings0
     ports:
-      - "8080:8080"
-      - "2022:2022"
-      - "443:443"
+      - "8080:8080"   # Wings API
+      - "2022:2022"   # SFTP
+      - "443:443"     # Optional HTTPS support (only use if you set SSL manually)
     tty: true
     environment:
       TZ: "UTC"
@@ -24,6 +22,7 @@ services:
       - /var/log/pterodactyl/:/var/log/pterodactyl/
       - /tmp/pterodactyl/:/tmp/pterodactyl/
       - /etc/ssl/certs:/etc/ssl/certs:ro
+
 networks:
   wings0:
     name: wings0
