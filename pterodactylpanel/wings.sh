@@ -5,14 +5,13 @@ original_dir=$(pwd)
 
 # Run privileged setup
 sudo bash -c '
-wget https://github.com/KSWarrior/Make-Own-Hosting/releases/download/PterodactylPanel/again-start-wings.sh
 
 # Create directories and navigate into wings
 mkdir -p pterodactyl/wings
 cd pterodactyl/wings
 
 # Download docker-compose config
-wget https://github.com/KSWarrior/Make-Own-Hosting/releases/download/PterodactylPanel/wings.yml -O docker-compose.yml
+wget https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/pterodactylpanel/wings.yml -O docker-compose.yml
 
 # Start Docker containers
 docker-compose up -d
