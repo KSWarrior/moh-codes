@@ -12,8 +12,8 @@ echo "   💬 Join our Discord: https://discord.gg/2kAYnH655h"
 echo "=============================================="
 
 # Create directories and navigate into wings
-mkdir -p pterodactyl/wings
-cd pterodactyl/wings
+mkdir -p /root/pterodactyl/panel
+cd /root/pterodactyl/panel
 
 # Download docker-compose config
 wget https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/pterodactylpanel/wings.yml -O docker-compose.yml
