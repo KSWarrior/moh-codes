@@ -12,8 +12,8 @@ echo "=============================================="
 set -e
 
 # Create and enter panel directory
-mkdir -p pterodactyl/panel
-cd ~/pterodactyl/panel
+mkdir -p /root/pterodactyl/panel
+cd /root/pterodactyl/panel
 
 # Download panel.yml as docker-compose.yml
 wget -q https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/pterodactylpanel/panel.yml -O docker-compose.yml
@@ -21,6 +21,6 @@ wget -q https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/pt
 # Start the containers
 docker-compose up -d
 
-# Run user creation
+# Run user creation interactively
 docker-compose run --rm panel php artisan p:user:make
 '
