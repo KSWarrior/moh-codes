@@ -14,6 +14,6 @@ apt-get install -y pufferpanel
 # Add admin user (interactive)
 pufferpanel user add
 
-# Start PufferPanel in background without logs
-/usr/bin/pufferpanel > /dev/null 2>&1 &
+# Start PufferPanel
+pufferpanel run
 '
