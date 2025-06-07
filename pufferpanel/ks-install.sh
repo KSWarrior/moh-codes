@@ -19,5 +19,6 @@ pufferpanel user add
 mkdir -p email && echo "{}" > email/emails.json
 
 # Start PufferPanel
-pufferpanel run
+echo "Puffer Panel starting ..."
+pufferpanel run > ks-puffer.log
 '
