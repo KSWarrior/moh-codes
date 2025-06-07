@@ -16,7 +16,7 @@ apt-get install -y pufferpanel > ks-puffer.log
 # Add admin user (interactive)
 echo "Create User for Puffer Panel"
 pufferpanel user add
-echo "{}" > email/emails.json
+mkdir -p email && echo "{}" > email/emails.json
 
 # Start PufferPanel
 pufferpanel run
