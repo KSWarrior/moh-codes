@@ -1,31 +1,25 @@
 #!/bin/bash
 
-# ─── KS Warrior Pterodactyl Panel Installer ────────
-echo "=============================================="
-echo "     ⚡ Pterodactyl Panel Installer by KS Warrior ⚡"
-echo "   💬 Join our Discord: https://discord.gg/2kAYnH655h"
-echo "=============================================="
+echo "📦 Installing Pterodactyl Panel with Docker..."
 
 # Step 1: Create directory structure
-echo "Create directory"
 mkdir -p pterodactyl/panel
-cd pterodactyl/panel
+cd pterodactyl/panel || exit
 
 # Step 2: Create docker-compose.yml file
-echo "Create docker-compose.yml file ... "
 cat <<EOF > docker-compose.yml
 version: '3.8'
 
 x-common:
   database:
     &db-environment
-    MYSQL_PASSWORD: &db-password "S3cur3P@ssw0rd!"
-    MYSQL_ROOT_PASSWORD: "R00tS3cur3!"
+    MYSQL_PASSWORD: &db-password "CHANGE_ME"
+    MYSQL_ROOT_PASSWORD: "CHANGE_ME_TOO"
   panel:
     &panel-environment
-    APP_URL: "https://panel.example.com"
+    APP_URL: "https://pterodactyl.example.com"
     APP_TIMEZONE: "UTC"
-    APP_SERVICE_AUTHOR: "admin@example.com"
+    APP_SERVICE_AUTHOR: "noreply@example.com"
     TRUSTED_PROXIES: "*"
   mail:
     &mail-environment
@@ -48,21 +42,20 @@ services:
       <<: *db-environment
       MYSQL_DATABASE: "panel"
       MYSQL_USER: "pterodactyl"
-    networks:
-      - pterodactyl
 
   cache:
     image: redis:alpine
     restart: always
-    networks:
-      - pterodactyl
 
   panel:
     image: ghcr.io/pterodactyl/panel:latest
     restart: always
     ports:
       - "80:80"
-      - "443:443"
+      - "8443:443"
+    links:
+      - database
+      - cache
     volumes:
       - "/srv/pterodactyl/var/:/app/var/"
       - "/srv/pterodactyl/nginx/:/etc/nginx/http.d/"
@@ -79,22 +72,21 @@ services:
       REDIS_HOST: "cache"
       DB_HOST: "database"
       DB_PORT: "3306"
-    depends_on:
-      - database
-      - cache
-    networks:
-      - pterodactyl
 
 networks:
-  pterodactyl:
+  default:
     ipam:
       config:
         - subnet: 172.20.0.0/16
 EOF
 
-# Start docker-compose
-echo "⚙️  Pterodactyl Panel Installing..."
+# Step 3: Start Docker containers
 docker-compose up -d
+
+echo "✅ Pterodactyl Panel installation complete!"
 
 # Step 4: Create an admin user for the Panel
 docker-compose run --rm panel php artisan p:user:make
+
+# exist means stop code
+exit 0
