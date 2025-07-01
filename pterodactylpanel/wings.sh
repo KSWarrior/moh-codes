@@ -6,12 +6,11 @@ echo "     ⚡ Pterodactyl Panel Installer by KS Warrior ⚡"
 echo "   💬 Join our Discord: https://discord.gg/2kAYnH655h"
 echo "=============================================="
 
-# Store current directory to return later
-original_dir=$(pwd)
+echo "📦 Installing Pterodactyl wings with Docker..."
 
 # Step 1: Create directory structure
 mkdir -p pterodactyl/wings
-cd pterodactyl/wings
+cd pterodactyl/wings || exit
 
 # Step 2: Create docker-compose.yml file
 cat <<EOF > docker-compose.yml
@@ -55,67 +54,27 @@ networks:
         - subnet: 172.21.0.0/16
     driver_opts:
       com.docker.network.bridge.name: wings0
-
 EOF
 
 # Step 3: Start Docker containers
 docker-compose up -d
 
+
 sudo bash -c '
-# fake config
-cat <<EOF > config.yml
-ka warrior 
-EOF
-'
+# Ask user to enter multi-line config
+echo "📝 Enter your wings config (type 'KS' on a new line to finish):"
 
-# cd on etc/pterodactyl/
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd .. && cd etc
-cd pterodactyl/
-
-# Prompt for multi-line config until user types KS
-echo "Enter config: "
 config=""
 while IFS= read -r line; do
   [[ "$line" == "KS" ]] && break
   config+="$line"$'\n'
 done
 
-sudo bash -c '
-# real config to file
-cat <<EOF > config.yml
-$config
-EOF
+# Save multi-line config correctly
+echo -e "$config" > /root/etc/pterodactyl/config.yml
 '
 
-# Return to original directory
-cd "$original_dir"
+echo "✅ Config saved to /root/etc/pterodactyl/config.yml"
 
-# Go into pterodactyl/wings and force-recreate containers
-cd pterodactyl/wings
+# Force-recreate containers
 docker-compose up -d --force-recreate
