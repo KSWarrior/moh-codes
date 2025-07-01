@@ -10,10 +10,14 @@ echo "=============================================="
 echo "📦 Installing Pterodactyl wings with Docker..."
 
 # Step 1: Create directory structure
+echo "📂 Creating Pterodactyl Wings directory..."
 mkdir -p pterodactyl/wings
+
+echo "📂 Entering Pterodactyl Wings directory..."
 cd pterodactyl/wings || exit
 
 # Step 2: Create docker-compose.yml file
+echo "📝 Creating docker-compose.yml file..."
 cat <<EOF > docker-compose.yml
 version: '3.8'
 
@@ -57,8 +61,10 @@ networks:
       com.docker.network.bridge.name: wings0
 EOF
 
-# Step 3: Start Docker containers
+echo "🚀 Starting Docker containers..."
 docker-compose up -d
+
+echo "✅ Pterodactyl Panel installation complete!"
 
 
 sudo bash -c '
@@ -74,8 +80,9 @@ done
 # Save multi-line config correctly
 echo -e "$config" > /root/etc/pterodactyl/config.yml
 '
-
 echo "✅ Config saved to /root/etc/pterodactyl/config.yml"
 
-# Force-recreate containers
+echo "🔄 Force-recreating Docker containers..."
 docker-compose up -d --force-recreate
+
+echo "✅ Docker containers force-recreated successfully!"
