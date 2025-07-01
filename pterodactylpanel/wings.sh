@@ -4,6 +4,7 @@
 echo "=============================================="
 echo "     ⚡ Pterodactyl Panel Installer by KS Warrior ⚡"
 echo "   💬 Join our Discord: https://discord.gg/2kAYnH655h"
+echo "   🌐 Visit our Website: https://ksweb.vercel.app"
 echo "=============================================="
 
 echo "📦 Installing Pterodactyl wings with Docker..."
