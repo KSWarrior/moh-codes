@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# ─── KS Warrior Pterodactyl Panel Installer ────────
+echo "=============================================="
+echo "     ⚡ Pterodactyl Panel Installer by KS Warrior ⚡"
+echo "   💬 Join our Discord: https://discord.gg/2kAYnH655h"
+echo "   🌐 Visit our Website: https://ksweb.vercel.app"
+echo "=============================================="
+
 echo "📦 Installing Pterodactyl Panel with Docker..."
 
 # Step 1: Create directory structure
