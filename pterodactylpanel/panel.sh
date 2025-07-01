@@ -7,13 +7,15 @@ echo "   💬 Join our Discord: https://discord.gg/2kAYnH655h"
 echo "   🌐 Visit our Website: https://ksweb.vercel.app"
 echo "=============================================="
 
-echo "📦 Installing Pterodactyl Panel with Docker..."
-
 # Step 1: Create directory structure
+echo "📂 Creating Pterodactyl Panel directory..."
 mkdir -p pterodactyl/panel
+
+echo "📂 Entering Pterodactyl Panel directory..."
 cd pterodactyl/panel || exit
 
 # Step 2: Create docker-compose.yml file
+echo "📝 Creating docker-compose.yml file..."
 cat <<EOF > docker-compose.yml
 version: '3.8'
 
@@ -88,12 +90,15 @@ networks:
 EOF
 
 # Step 3: Start Docker containers
+echo "🚀 Starting Docker containers..."
 docker-compose up -d
 
-echo "✅ Pterodactyl Panel installation complete!"
+echo "✅ Pterodactyl Panel installation complete by using KS Code!"
 
-# Step 4: Create an admin user for the Panel
+echo "👤 Creating an admin user for the Pterodactyl Panel..."
 docker-compose run --rm panel php artisan p:user:make
+
+echo "✅ Admin user creation process complete!"
 
 # exist means stop code
 exit 0
