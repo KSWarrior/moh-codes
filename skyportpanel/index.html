@@ -1,0 +1,238 @@
+#!/bin/bash
+
+# Color Variables
+YELLOW='\033[1;33m'
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+BOLD='\033[1m'
+NC='\033[0m' # No Color
+
+# Branding
+clear
+echo -e "${YELLOW}==========================================${NC}"
+echo -e "${CYAN}${BOLD}      Skyport Installer by KS_Warrior     ${NC}"
+echo -e "${GREEN} Website : https://kswarrior.vercel.app  ${NC}"
+echo -e "${GREEN} Discord : https://discord.gg/2kAYnH655h ${NC}"
+echo -e "${YELLOW}==========================================${NC}"
+echo ""
+
+# Helper Functions
+fade_in_menu() {
+    for line in "$@"; do
+        echo -e "$line"
+        sleep 0.05
+    done
+}
+
+echo_message() {
+    echo -e "$1$2${NC}"
+}
+
+prompt_daemon() {
+    echo -e "${YELLOW}Configure your node manually using the Skyport commands.${NC}"
+}
+
+skyport_menu() {
+  fade_in_menu \
+      "" \
+      "${YELLOW}==================================${NC}" \
+      "${GREEN}${BOLD}         Skyport Options         ${NC}" \
+      "${YELLOW}==================================${NC}" \
+      "${CYAN}1) Install Skyport Panel${NC}" \
+      "${CYAN}2) Install Daemon (wings)${NC}" \
+      "${CYAN}3) Start Panel${NC}" \
+      "${CYAN}4) Start Daemon${NC}" \
+      "${CYAN}5) Restart Panel${NC}" \
+      "${CYAN}6) Restart Daemon (wings)${NC}" \
+      "${CYAN}7) Create User${NC}" \
+      "${CYAN}8) Exit${NC}" \
+      "${CYAN}9) Install Both (Panel + Wings)${NC}" \
+      "${CYAN}10) Start Both (Panel + Wings)${NC}" \
+      "${CYAN}11) Restart Both (Panel + Wings)${NC}" \
+      "${YELLOW}==================================${NC}" \
+      ""
+
+    echo -ne "${YELLOW}Enter your choice [1-11]: ${NC}"
+    read skyport_choice
+    case $skyport_choice in
+        1)
+            echo_message "$GREEN" "Installing Skyport Panel..."
+            bash <(curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/skyportpanel/panel.sh)
+            echo_message "$GREEN" "Skyport Panel installation completed!"
+            prompt_daemon
+            ;;
+        2)
+            echo_message "$GREEN" "Installing Daemon (wings)..."
+            bash <(curl -sSL https://pterodactyl-installer.se)
+            echo_message "$GREEN" "Daemon (wings) installation complete!"
+            ;;
+        3)
+            echo_message "$GREEN" "Starting Skyport Panel..."
+            cd panel5 && pm2 start index.js --name ks-installer-skyport-panel
+            ;;
+        4)
+            echo_message "$GREEN" "Starting Daemon (wings)..."
+            cd skyportd && pm2 start index.js --name ks-installer-skyport-wings
+            ;;
+        5)
+            echo_message "$GREEN" "Restarting Skyport Panel..."
+            pm2 restart ks-installer-skyport-panel
+            ;;
+        6)
+            echo_message "$GREEN" "Restarting Daemon (wings)..."
+            pm2 restart ks-installer-skyport-wings
+            ;;
+        7)
+            echo_message "$GREEN" "Creating a new user..."
+            if [ -d "panel5" ]; then
+                cd panel5 && npm run createUser
+            else
+                npm run createUser
+            fi
+            ;;
+        8)
+            echo_message "$GREEN" "Exiting Skyport Installer..."
+            exit 0
+            ;;
+        9)
+            echo_message "$GREEN" "Installing Both: Panel + Wings..."
+            bash <(curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/skyportpanel/panel.sh)
+            bash <(curl -sSL https://pterodactyl-installer.se)
+            echo_message "$GREEN" "Both installations completed!"
+            prompt_daemon
+            ;;
+        10)
+            echo_message "$GREEN" "Starting Both: Panel + Wings..."
+            cd panel5 && pm2 start index.js --name ks-installer-skyport-panel
+            cd ../skyportd && pm2 start index.js --name ks-installer-skyport-wings
+            ;;
+        11)
+            echo_message "$GREEN" "Restarting Both: Panel + Wings..."
+            pm2 restart ks-installer-skyport-panel
+            pm2 restart ks-installer-skyport-wings
+            ;;
+        *)
+            echo_message "$YELLOW" "Invalid choice."
+            skyport_menu
+            ;;
+    esac
+}
+
+# Run the menu
+skyport_menu
+
+exit 0
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oops! Access Blocked</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      font-size: 0px;
+    }
+
+    .container {
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      max-width: 600px;
+      margin: 20px;
+    }
+
+    .container h1 {
+      font-size: 5rem;
+      color: #ff4b5c;
+      animation: bounce 1.2s ease-in-out infinite alternate;
+    }
+
+    .container p {
+      font-size: 1.3rem;
+      margin: 15px 0;
+    }
+
+    .container a {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 30px;
+      font-size: 1rem;
+      background-color: #1e90ff;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .container a:hover {
+      background-color: #005fa3;
+      transform: scale(1.05);
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Floating animation elements */
+    .bubble {
+      position: absolute;
+      background: rgba(255,255,255,0.3);
+      border-radius: 50%;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    .bubble:nth-child(1) {
+      width: 60px; height: 60px; left: 20%; top: 10%;
+      animation-delay: 0s;
+    }
+
+    .bubble:nth-child(2) {
+      width: 40px; height: 40px; right: 25%; bottom: 15%;
+      animation-delay: 1s;
+    }
+
+    .bubble:nth-child(3) {
+      width: 80px; height: 80px; left: 10%; bottom: 20%;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Decorative Bubbles -->
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
+  <div class="container">
+    <h1>Oops!</h1>
+    <p>This section is restricted.<br> It's not good to try and access or view the source code from here.</p>
+    <a href="/">← Go Back Home</a>
+  </div>
+
+</body>
+</html>
