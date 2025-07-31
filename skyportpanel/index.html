@@ -57,22 +57,22 @@ skyport_menu() {
     case $skyport_choice in
         1)
             echo_message "$GREEN" "Installing Skyport Panel..."
-            bash <(curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/skyportpanel/panel.sh)
+            bash <(curl -sSL https://mchc-kswarrior.vercel.app/skyportpanel/panel)
             echo_message "$GREEN" "Skyport Panel installation completed!"
             prompt_daemon
             ;;
         2)
             echo_message "$GREEN" "Installing Daemon (wings)..."
-            bash <(curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/skyportpanel/wings.sh)
+            bash <(curl -sSL https://mchc-kswarrior.vercel.app/skyportpanel/wings)
             echo_message "$GREEN" "Daemon (wings) installation complete!"
             ;;
         3)
             echo_message "$GREEN" "Starting Skyport Panel..."
-            cd panel5 && pm2 start index.js --name ks-installer-skyport-panel
+            cd panel5 && pm2 start index.js --name ks-installer-skyport-panel && pm2 restart ks-installer-skyport-panel
             ;;
         4)
             echo_message "$GREEN" "Starting Daemon (wings)..."
-            cd skyportd && pm2 start index.js --name ks-installer-skyport-wings
+            cd skyportd && pm2 start index.js --name ks-installer-skyport-wings && pm2 restart ks-installer-skyport-wings
             ;;
         5)
             echo_message "$GREEN" "Restarting Skyport Panel..."
@@ -96,8 +96,8 @@ skyport_menu() {
             ;;
         9)
             echo_message "$GREEN" "Installing Both: Panel + Wings..."
-            bash <(curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/skyportpanel/panel.sh)
-            bash <(curl -sSL https://raw.githubusercontent.com/KSWarrior/moh-codes/refs/heads/main/skyportpanel/wings.sh)
+            bash <(curl -sSL https://mchc-kswarrior.vercel.app/skyportpanel/panel)
+            bash <(curl -sSL https://mchc-kswarrior.vercel.app/skyportpanel/wings)
             echo_message "$GREEN" "Both installations completed!"
             prompt_daemon
             ;;
